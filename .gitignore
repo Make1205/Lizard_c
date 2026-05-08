@@ -1,0 +1,5 @@
+# Build outputs
+*.o
+Lizard
+build/
+benchmark-results/
