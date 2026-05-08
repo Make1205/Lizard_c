@@ -28,17 +28,31 @@ long long rdtsc(void)
 
 
 //////////////////////////////////  PARAMETER CHOICES  /////////////////////////////////////
-//#define PARAMS_Classical								// classical parameter for Lizard
-#define PARAMS_Recommended								// recommended parameter for Lizard
-//#define PARAMS_Homadd									// recommended parameter for Lizard which supports 100 number of homomorphic additions
-//#define PARAMS_Classical_Plaintext_32bit				// classical parameter for Lizard with 32-bit plaintext
-//#define PARAMS_CCA									// recommended parameter for CCALizard
+//#define PARAMS_Classical                                // classical parameter for Lizard
+//#define PARAMS_Recommended                              // recommended parameter for Lizard
+//#define PARAMS_Homadd                                   // recommended parameter for Lizard which supports 100 number of homomorphic additions
+//#define PARAMS_Classical_Plaintext_32bit                // classical parameter for Lizard with 32-bit plaintext
+//#define PARAMS_CCA                                      // recommended parameter for CCALizard
+
+#if !defined(PARAMS_Classical) && !defined(PARAMS_Recommended) && \
+    !defined(PARAMS_Homadd) && !defined(PARAMS_Classical_Plaintext_32bit) && \
+    !defined(PARAMS_CCA)
+#define PARAMS_Recommended
+#endif
 
 
 //////////////////////////////////  PARAMETER SETS  ////////////////////////////////////////
 
-#define iter 100		// iteration number for keygen & EncDec test
-#define testnum 1000	// repeatetion number of Enc Dec procedure in a single iteration
+#ifndef ITER_OVERRIDE
+#define iter 100        // iteration number for keygen & EncDec test
+#else
+#define iter ITER_OVERRIDE
+#endif
+#ifndef TESTNUM_OVERRIDE
+#define testnum 1000    // repeatetion number of Enc Dec procedure in a single iteration
+#else
+#define testnum TESTNUM_OVERRIDE
+#endif
 
 #ifdef PARAMS_Classical
 #define PARAMNAME "Classical"
